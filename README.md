@@ -30,7 +30,7 @@ command :```shell python models/train_classifier.py clean_database_filepath mode
 Objectives : Running a web app which display statistics on the disaster database. The web app also allows the user to input a new message and gets from this message a prediction of the category of disaster the message is about.
 
    ### how to deploy with the command line:
-Go into the app folder (```cd app```) and the run.py file(```shell python run.py```).
+Go into the app folder (```cd app```), the run.py file(```shell python run.py```) and navigate in your browser to the address shown in your command line.
 
 
 # Licensing
