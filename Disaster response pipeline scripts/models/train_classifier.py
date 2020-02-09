@@ -75,7 +75,7 @@ def build_model():
     return Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(AdaBoostClassifier()))
+        ('clf', MultiOutputClassifier(BaggingClassifier()))
     ])
 
 
