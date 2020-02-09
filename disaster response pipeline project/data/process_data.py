@@ -9,12 +9,25 @@ parser.add_argument('--database_filepath',type=str,default="data/DisasterRespons
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Loading the raw data to clean.
+    - param messages_filepath: data containning the disasters messages.
+    - param categories_filepath: data giving the disasters categories of the messages
+    return:
+       - the merged  database ;
+    """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     return messages.merge(categories, left_on='id', right_on='id')
 
 
 def clean_data(df):
+    """
+    cleaning the merged database returned by the load_data function .
+    - param df: the data table to clean.
+    return:
+       - the cleaned  data table ;
+    """
     categories = df['categories'].str.split(";",expand=True)
     row = categories.loc[0]
     category_colnames = [nam.split("-")[0] for nam in row]
@@ -29,11 +42,19 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    saving the cleaed database returned by the clean_data function .
+    - param df: the database  to save.
+     - database_filename df: the path where  to save the data.
+    """
     engine = create_engine('sqlite:///'+database_filename)
     df.to_sql('cleanData', engine, index=False)
 
 
 def main():
+    """
+    Processing all the steps to clean the data.
+    """
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
