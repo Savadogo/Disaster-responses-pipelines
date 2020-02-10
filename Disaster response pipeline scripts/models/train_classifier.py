@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import BaggingClassifier,AdaBoostClassifier
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.pipeline import Pipeline
 import pickle
@@ -50,7 +50,7 @@ def tokenize(text):
     for url in detected_urls:
         text =text.replace(url,'url_link')
         
-    regex_express='^[a-zA-Z0-9]'
+    regex_express='[^a-zA-Z0-9]'
     detected_spc = re.findall(regex_express, text)
     for spc in detected_spc:
         text =text.replace(spc,' ')
@@ -70,14 +70,18 @@ def build_model():
     """
     Building the model to use on the clean data to predict the categories
     return:
-       - The pipeline;
+       - A gridsearch object of the pipeline;
     """
-    return Pipeline([
+
+    parameters = {
+    'clf__estimator__learning_rate':[0.1,0.3,0.5,0.7,1],
+    'clf__estimator__n_estimators':[10,25,50,80,100]}
+    pipe=Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(BaggingClassifier()))
+        ('clf', MultiOutputClassifier(AdaBoostClassifier()))
     ])
-
+    return GridSearchCV(pipe, parameters)
 
 def evaluate_model(model, X_test, Y_test, category_names):
     """
