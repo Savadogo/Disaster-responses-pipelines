@@ -1,5 +1,5 @@
 # Disaster-responses-pipelines
-Repository for Udacity Data Science project which consist to build a Machine learning model to predict from a message on twitter the category of disaster the message is about.
+Repository for Udacity Data Science project which consist to build a Machine learning model to predict from a message on twitter the category of disaster.
 
 All the files to run are in the folder 'disaster response pipeline project'.
 ## Packages requirements
