@@ -32,7 +32,7 @@ Objectives : Running a web app which display statistics on the disaster database
    ### how to deploy with the command line:
 Go into the app folder (```cd app```), run the run.py file(```shell python run.py```) and navigate in your browser to the address shown in your command line.
 
-You can check a demo of the app at the following link ```https://savadogoaebapp.herokuapp.com/```
+You can check a demo of the app at the following link [https://savadogoaebapp.herokuapp.com/]
 
 # Licensing
 "The code in this project is licensed under MIT license."
